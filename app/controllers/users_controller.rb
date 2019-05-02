@@ -40,7 +40,7 @@ include CitiesHelper
 
 		if @user.save 
 			#@city.save
-
+			session[:user_id] = @user.id
 			redirect_to root_path
 			flash[:success] = "Your account has been created with success, my coño friend!"
 		else

@@ -24,4 +24,4 @@ JoinTagToGossip.destroy_all
 	join_tag_to_gossip = JoinTagToGossip.create(gossip: @gossip, tag: tag)
 end
 @ville = City.create(name: Faker::Address.city, zip_code: Faker::Address.zip_code)
-@anonymous= User.create(first_name: "Arno", last_name: "Nymous", description: "je suis anonyme", email: "arno@nym.ous", age: 23, city: @ville)
+@anonymous= User.create(first_name: "Arno", last_name: "Nymous", description: "je suis anonyme", email: "arno@nym.ous", age: 23, city: @ville, password: "mescouilles")

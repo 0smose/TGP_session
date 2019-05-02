@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 	end
 	resources :users
 	resources :cities
-	resources :sessions, only: [:new, :create, :destroy] 
+	resources :session, only: [:new, :create, :destroy] 
 
 end
 

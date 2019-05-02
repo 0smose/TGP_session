@@ -22,7 +22,17 @@
       <a class="nav-item nav-link active" href="<%= gossips_path %>">Home <span class="sr-only">(current)</span></a>
       <a class="nav-item nav-link" href="<%=about_team_path%>">Team</a>
       <a class="nav-item nav-link" href="<%=about_contact_path%>">Contact</a>
+
+      <% if logged_in? != true %>
       <a class="nav-item nav-link" href="<%=new_user_path%>">Sign up</a>
+      <a class="nav-item nav-link" href="<%=new_session_path%>">Sign in</a>
+      <% else %>
+
+     <span class="nav-item navbar-text">  <%= "Bonjour, #{current_user.first_name}" %> </span>
+      <span class="nav-item nav-link"><%= link_to "Se déconnecter", session_path(session[:user_id]), method: :delete %></span>
+      <% end %>
+    
+
     </div>
   </div>
 </nav>
