@@ -1,4 +1,7 @@
+require 'cities_helper'
 class UsersController < ApplicationController
+
+include CitiesHelper
 
 	def show
 		@user_precis = User.find(params[:id])
@@ -6,5 +9,44 @@ class UsersController < ApplicationController
 		@user_city = City.find(@user_city_id).name
 	end
 
+	def new
+		@user = User.new
+	end
 
+	def create
+		if City.find_by(name: params[:city_name])
+			@city_db = City.find_by(name: params[:city_name])
+			@user = User.new(email: params[:email], password: params[:password],
+				first_name: params[:first_name], last_name: params[:last_name], 
+				age: params[:age], city: @city_db)
+			puts "*" * 100
+			puts @user.first_name
+			puts @city_db.name
+			@user.save
+		else
+			@city = City.new(name: params[:city_name], zip_code: params[:zip_code])
+			# @city.name = params[:city_name]
+			# @city.zip_code =  params[:zip_code]
+			@user = User.new(email: params[:email], password: params[:password],
+				first_name: params[:first_name], last_name: params[:last_name], 
+				age: params[:age], city: @city)
+			puts "*" * 100
+			puts @user.first_name
+			puts @city.name
+		
+			@user.save
+		end
+
+
+		if @user.save 
+			#@city.save
+
+			redirect_to root_path
+			flash[:success] = "Your account has been created with success, my coño friend!"
+		else
+			flash[:alert] = "Try again, my coño friend!"
+
+			render 'new'
+		end
+	end
 end

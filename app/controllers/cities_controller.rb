@@ -18,4 +18,8 @@ class CitiesController < ApplicationController
 
   def new
   end
+
+  # def create 
+  #   @city = City.create
+  # end
 end

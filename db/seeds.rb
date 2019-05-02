@@ -15,7 +15,7 @@ JoinTagToGossip.destroy_all
 
 10.times do
 	city = City.create(name: Faker::Address.city, zip_code: Faker::Address.zip_code)
-	@user = User.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, description: Faker::Lorem.paragraph, email: Faker::Internet.email, age: rand(15..60), city: city)
+	@user = User.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, description: Faker::Lorem.paragraph, email: Faker::Internet.email, age: rand(15..60), city: city, password: "holaquetal")
 	tag = Tag.create(title: Faker::Book.title)
 	private_message = PrivateMessage.create(content: Faker::Lorem.paragraph, recipient: @user, sender: @user)
 	2.times do
