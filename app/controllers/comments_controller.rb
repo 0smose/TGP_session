@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
 
-  before_action :authenticate_user, only: [:new, :create]
+  before_action :authenticate_user, only: [:new, :create, :show]
 
   def index
     @comments = Comment.all
@@ -19,8 +19,7 @@ class CommentsController < ApplicationController
 
   def create
     @gossip = Gossip.find(params['gossip_id']) 
-    # @anonymous = User.find_by(last_name: "Nymous")
-    # @anonymous_id = @anonymous.id
+
     @comment = Comment.new(content: params[:content], user_id: current_user.id, gossip_id: @gossip.id)
     @comment.save
     redirect_to gossip_path(@gossip.id)
