@@ -1,5 +1,7 @@
 class CommentsController < ApplicationController
 
+  before_action :authenticate_user, only: [:new, :create]
+
   def index
     @comments = Comment.all
   end
@@ -17,9 +19,9 @@ class CommentsController < ApplicationController
 
   def create
     @gossip = Gossip.find(params['gossip_id']) 
-    @anonymous = User.find_by(last_name: "Nymous")
-    @anonymous_id = @anonymous.id
-    @comment = Comment.new(content: params[:content], user_id: @anonymous_id, gossip_id: @gossip.id)
+    # @anonymous = User.find_by(last_name: "Nymous")
+    # @anonymous_id = @anonymous.id
+    @comment = Comment.new(content: params[:content], user_id: current_user.id, gossip_id: @gossip.id)
     @comment.save
     redirect_to gossip_path(@gossip.id)
   end
@@ -63,6 +65,13 @@ def comment_params
   params.require(:comment).permit(:content)
 
 end
+
+  def authenticate_user
+    unless current_user
+      flash[:danger] = "Please log in."
+      redirect_to new_session_path
+    end
+  end
 
 
 end

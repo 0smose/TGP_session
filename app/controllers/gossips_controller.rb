@@ -1,4 +1,7 @@
 class GossipsController < ApplicationController
+
+  before_action :authenticate_user, only: [:new, :create]
+
   def index
     @gossip = Gossip.all
   end
@@ -16,8 +19,8 @@ class GossipsController < ApplicationController
   end
 
   def create
-    anonymous = User.find_by(last_name: "Nymous")
-    @gossip_new = Gossip.new(title: params[:title], content: params[:content], user: anonymous)
+    # anonymous = User.find_by(last_name: "Nymous")
+    @gossip_new = Gossip.new(title: params[:title], content: params[:content], user: current_user)
     @gossip_new.save
 
     if @gossip_new.save
@@ -63,5 +66,13 @@ def gossip_params
 
 end
 
+  def authenticate_user
+    unless current_user
+      flash[:danger] = "Please log in."
+      redirect_to new_session_path
+    end
+  end
 
 end
+
+
