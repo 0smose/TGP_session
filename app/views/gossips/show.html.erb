@@ -4,6 +4,21 @@
   
       <h6> <%= "#{@gossip_precis.title}" %></h6>
       <%= "#{@gossip_precis.content}" %><br>
+
+    <% pre_like = @gossip_precis.likes.find { |like| like.user_id == current_user.id} %>
+   <% if pre_like %>
+     <%= button_to 'Unlike', gossip_like_path(@gossip_precis, pre_like), method: :delete %>
+   <% else %>
+     <%= button_to 'Like', gossip_likes_path(@gossip_precis), method: :post %>
+   <% end %>
+      
+
+ <p><span class="badge badge-primary badge-pill"> <%=@gossip_precis.likes.count %> <%= (@gossip_precis.likes.count) == 1 ? 'Like' : 'Likes'%></p></span> </p>
+
+
+
+
+
       <%= "Auteur :" %> <%=link_to " #{@gossip_precis.user.first_name} #{@gossip_precis.user.last_name}", user_path(@gossip_precis.user.id) %><br>
       <%= "Ville :" %><%= link_to " #{@gossip_user_city}", city_path(@gossip_user_city_id) %><br>
 

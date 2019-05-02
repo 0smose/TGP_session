@@ -19,9 +19,6 @@ include CitiesHelper
 			@user = User.new(email: params[:email], password: params[:password],
 				first_name: params[:first_name], last_name: params[:last_name], 
 				age: params[:age], city: @city_db)
-			puts "*" * 100
-			puts @user.first_name
-			puts @city_db.name
 			@user.save
 		else
 			@city = City.new(name: params[:city_name], zip_code: params[:zip_code])
@@ -30,10 +27,6 @@ include CitiesHelper
 			@user = User.new(email: params[:email], password: params[:password],
 				first_name: params[:first_name], last_name: params[:last_name], 
 				age: params[:age], city: @city)
-			puts "*" * 100
-			puts @user.first_name
-			puts @city.name
-		
 			@user.save
 		end
 

@@ -3,6 +3,9 @@ class SessionController < ApplicationController
 	def new
 	end
 
+  def index
+  end
+
 def create
   # cherche s'il existe un utilisateur en base avec l’e-mail
   @user = User.find_by(email: params[:email])
@@ -22,7 +25,8 @@ def create
 end
 def destroy
 session.delete(:user_id)
-redirect_to root_path
+
+redirect_to new_session_path
 end
 
 
