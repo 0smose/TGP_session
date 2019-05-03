@@ -2,6 +2,8 @@
 <html>
   <head>
     <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/lux/bootstrap.min.css" rel="stylesheet" integrity="sha384-hVpXlpdRmJ+uXGwD5W6HZMnR9ENcKVRn855pPbuI/mwPIEKAuKgTKgGksVGmlAvt" crossorigin="anonymous">
+
+ 
     <title>TheGossipProject</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -28,7 +30,7 @@
       <a class="nav-item nav-link" href="<%=new_session_path%>">Sign in</a>
       <% else %>
 
-     <span class="nav-item navbar-text">  <%= "Bonjour, #{current_user.first_name}" %> </span>
+     <span class="nav-item nav-link">  <%= "Bonjour, #{current_user.first_name}" %> </span>
       <span class="nav-item nav-link"><%= link_to "Se déconnecter", session_path(session[:user_id]), method: :delete %></span>
       <% end %>
     
